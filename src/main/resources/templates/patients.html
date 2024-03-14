@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="p-3 m-3">
+    <div class="card">
+        <div class="card-header">
+            <h2>Liste des patients</h2>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom & prénom</th>
+                    <th>Date de naissance</th>
+                    <th>Téléphone</th>
+                    <th>Malade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${ps}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nom}"></td>
+                    <td th:text="${p.dateNaissanec}"></td>
+                    <td th:text="${p.phone}"></td>
+                    <td th:text="${p.malade}"></td>
+                    <td>
+                            <a class="btn btn-danger" th:href="@{/DeletePatient(nom=${p.nom})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
