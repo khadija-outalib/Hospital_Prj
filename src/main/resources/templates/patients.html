@@ -7,20 +7,29 @@
 </head>
 <body>
 
-<div class="p-3 m-3">
+<div class="container my-4">
     <div class="card">
         <div class="card-header">
-            <h2>Liste des patients</h2>
+            <h2 class="mb-0">Liste des patients</h2>
         </div>
         <div class="card-body">
-            <table class="table">
+            <form method="get" th:action="@{/index}">
+                <div class="mb-3">
+                    <label for="keyword" class="form-label">Keyword</label>
+                    <input type="text" id="keyword" name="keyword" class="form-control" th:value="${keyword}">
+                </div>
+                <button type="submit" class="btn btn-outline-info">Rechercher</button>
+            </form>
+
+            <table class="table mt-3">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nom & prénom</th>
-                    <th>Date de naissance</th>
+                    <th>Nom & Prénom</th>
+                    <th>Date de Naissance</th>
                     <th>Téléphone</th>
                     <th>Malade</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,17 +40,24 @@
                     <td th:text="${p.phone}"></td>
                     <td th:text="${p.malade}"></td>
                     <td>
-                            <a class="btn btn-danger" th:href="@{/DeletePatient(nom=${p.nom})}">Delete</a>
+                        <a onclick="return confirm('Êtes-vous sûr(e)?')" class="btn btn-danger" th:href="@{/DeletePatient(nom=${p.nom})}">Supprimer</a>
+                        <a class="btn btn-success" th:href="@{/UpdatePatient(id=${p.id})}">Modifier</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
-
+            <nav aria-label="Navigation des pages">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:each="page,status:${ps}">
+                        <a th:class="${status.index==currentPage ? 'page-link active' : 'page-link'}"
+                           th:href="@{/index(page=${status.index},keyword=${keyword})}"
+                           th:text="${status.index + 1}"></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
-
-
 
 </body>
 </html>

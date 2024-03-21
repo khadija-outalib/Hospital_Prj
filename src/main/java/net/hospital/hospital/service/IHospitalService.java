@@ -16,5 +16,7 @@ public interface IHospitalService {
 
     void deletePatient (String nom);
 
+    void deleteById(Long id);
+
 
 }

@@ -24,19 +24,8 @@ public class PatientRestController {
     public List<Patient> PatientList() {
        return patientRepository.findAll();
     }
-    @GetMapping("/Updatepatient")
-    @ResponseBody
-    public List<Patient> UpdatePatient (@RequestParam String nom,@RequestParam String tel){
-      iHospitalService.updateTelPatient(nom, tel);
-       return patientRepository.findAll();
-    }
-    @GetMapping("/DeletePatient")
-    @ResponseBody
-    public List<Patient>  DeletePatient(@RequestParam String nom){
-         iHospitalService.deletePatient(nom);
-        return patientRepository.findAll();
 
-    }
+
 
 
 }

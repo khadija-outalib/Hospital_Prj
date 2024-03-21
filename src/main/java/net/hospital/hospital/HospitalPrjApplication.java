@@ -21,17 +21,17 @@ public class HospitalPrjApplication {
         SpringApplication.run(HospitalPrjApplication.class, args);
     }
 
+
     /**
     @Bean
     CommandLineRunner start(IHospitalService hospitalService ,
                             PatientRepository patientRepository,
                             MdecinRepository mdecinRepository){
         return args -> {
-            hospitalService.savePatient(new Patient("Tazi Alli",new Date("12/02/1990"),false,"0647560853"));
-            hospitalService.savePatient(new Patient("Sara ALmaie",new Date("03/31/1998"),true,"0545694587"));
-            hospitalService.savePatient(new Patient("Jihan iderissi",new Date("11/02/1999"),false ,null));
-            hospitalService.savePatient(new Patient("Amine dersii",new Date("11/20/1995"),true, "0623147625"));//-----------------------------------------------------------------------------------------------------------
-
+            hospitalService.savePatient(new Patient("Tazi Salma3",new Date("12/02/1979"),false,"0647560853"));
+            hospitalService.savePatient(new Patient("Salwa tijanie3",new Date("03/31/2003"),true,"0545694587"));
+            hospitalService.savePatient(new Patient("iderisse mehdi3",new Date("11/02/1998"),false ,null));
+            hospitalService.savePatient(new Patient("aicha dersii 3",new Date("11/20/1997"),true, "0623147625"));//-----------------------------------------------------------------------------------------------------------
             //-----------------------------------------------------------------------------------------------------------
 
 
@@ -55,6 +55,6 @@ public class HospitalPrjApplication {
 
         };
 
-    }
-     **/
+    }**/
+
 }

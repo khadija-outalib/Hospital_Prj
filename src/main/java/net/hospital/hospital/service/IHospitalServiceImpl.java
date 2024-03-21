@@ -62,14 +62,21 @@ public Patient updateTelPatient(String nom, String Tel) {
     public void deletePatient(String nom) {
         Patient p = patientRepository.findByNom(nom);
 
-        if (p!=null) {
+        if (p != null) {
 
             patientRepository.delete(p);
+
         } else {
 
             throw new EmptyResultDataAccessException("No patient found with name: " + nom, 1);
+
         }
 
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        patientRepository.deleteById(id);
     }
 
 
