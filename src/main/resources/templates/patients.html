@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page1">
 <head>
     <meta charset="UTF-8">
-    <title>Hospital</title>
+    <title>Hospital-patients</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <script src ="/webjars/jquery/3.7.1/jquery.js"></script>
+    <link rel="stylesheet"  href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css">
+
 </head>
 <body>
-
-<div class="container my-4">
+<div layout:fragment="content1">
+    <div class="container my-4">
     <div class="card">
         <div class="card-header">
             <h2 class="mb-0">Liste des patients</h2>
         </div>
         <div class="card-body">
-            <form method="get" th:action="@{/index}">
-                <div class="mb-3">
-                    <label for="keyword" class="form-label">Keyword</label>
-                    <input type="text" id="keyword" name="keyword" class="form-control" th:value="${keyword}">
+            <form method="get" th:action="@{/user/index}">
+                <div class="mb-3 d-flex align-items-center">
+                    <label for="keyword" class="form-label me-2">Keyword</label>
+                    <input type="text" id="keyword" name="keyword" class="form-control me-2" th:value="${keyword}">
+                    <button type="submit" class="btn btn-outline-info">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </div>
-                <button type="submit" class="btn btn-outline-info">Rechercher</button>
+
             </form>
 
             <table class="table mt-3">
@@ -40,24 +48,34 @@
                     <td th:text="${p.phone}"></td>
                     <td th:text="${p.malade}"></td>
                     <td>
-                        <a onclick="return confirm('Êtes-vous sûr(e)?')" class="btn btn-danger" th:href="@{/DeletePatient(nom=${p.nom})}">Supprimer</a>
-                        <a class="btn btn-success" th:href="@{/UpdatePatient(id=${p.id})}">Modifier</a>
+                        <a onclick="return confirm('Êtes-vous sûr(e)?')" class="btn btn-danger"
+                           th:href="@{/admin/DeletePatient(id=${p.id},keyword=${keyword},page= ${currentPage})}">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                        <a class="btn btn-success"
+                           th:href="@{/admin/UpdatePatient(id=${p.id})}">
+
+                        <i class="bi bi-brush"></i>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
             <nav aria-label="Navigation des pages">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item" th:each="page,status:${ps}">
-                        <a th:class="${status.index==currentPage ? 'page-link active' : 'page-link'}"
-                           th:href="@{/index(page=${status.index},keyword=${keyword})}"
-                           th:text="${status.index + 1}"></a>
+                    <li class="page-item" th:each="page,status:${pages}">
+                        <a th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
+                           th:class="${status.index==currentPage ? 'page-link active' : 'page-link'}"
+                           th:text="${status.index}"></a>
                     </li>
                 </ul>
             </nav>
+
+
         </div>
     </div>
 </div>
 
+</div>
 </body>
 </html>

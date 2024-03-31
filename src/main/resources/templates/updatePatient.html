@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="page1">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Patients</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+    <script src="/webjars/jquery/3.7.1/jquery.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+<div layout:fragment="content1">
+    <form method="post" th:action="@{/admin/save}" th:object="${patient}">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col">
+                    <label for="id">Id</label>
+                    <input type="text" id="id" class="form-control" disabled th:field="*{id}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="nomPrenom">Nom & Prénom</label>
+                    <input type="text" id="nomPrenom" class="form-control" placeholder="Nom & Prénom" th:field="*{nom}">
+                    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+
+                </div>
+                <div class="col">
+                    <label for="dateNaissance">Date de Naissance</label>
+                    <input type="date" id="dateNaissance" class="form-control" placeholder="Date de Naissance" th:field="*{dateNaissanec}">
+                    <span  th:errors="${patient.dateNaissanec}"></span>                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <label for="telephone">Téléphone</label>
+                    <input type="text" id="telephone" class="form-control" placeholder="Téléphone" th:field="*{phone}">
+                    <span  th:errors="${patient.phone}"></span>
+                </div>
+                <div class="col">
+                    <div class="form-check mt-4">
+                        <input type="checkbox" id="malade" name="malade" class="form-check-input" th:checked="*{malade}">
+                        <label for="malade" class="form-check-label">Malade</label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>
